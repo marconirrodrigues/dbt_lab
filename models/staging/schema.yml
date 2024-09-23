@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: raw               # Nome da fonte (pode ser o nome do schema ou da origem)
+    description: "Dados brutos da camada raw."  # Descrição opcional
+    schema: raw                    # Nome do schema que contém os dados brutos
+    tables:
+      - name: raw_spotify_tracks              # Nome da tabela na origem de dados
+        description: "Tabela com as informações das faixas de artistas e suas descrições do Spotify"   # Descrição opcional da tabela
+        columns:
+          - name: id        # Coluna na tabela
+            description: "ID único da transação."
+          - name: name
+            description: "Nome da música"
+          - name: genre
+            description: "Genero da música"
+          - name: artists
+            description: "Nomes dos artistas e cantores"
+          - name: album
+            description: "Album da musica"
+          - name: popularity
+            description: "Nível de popularidade da música"
+          - name: duration_ms
+            description: "Duração em milisegundos da música"
+          - name: explicit
+            description: "Se a música tem conteúdo explícito, tipo booleano = true or false"
+
+models:
+  - name: trusted_spotify_tracks                      # Nome do modelo que está sendo testado
+    description: "Transformação de dados brutos para análise."  # Descrição do modelo
+    columns:
+      - name: id                         # Nome da coluna sendo testada
+        description: "Chave primária do modelo."
+        tests:                           # Definição de testes para a coluna
+          - unique                       # Testa se os valores são únicos
+          - not_null                     # Testa se os valores não são nulos

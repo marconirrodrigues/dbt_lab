@@ -1,0 +1,33 @@
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+
+# Poetry environment
+.poetry/
+poetry.lock
+pyproject.toml
+
+# Virtual environment (se não estiver usando um ambiente virtual gerenciado por Poetry)
+venv/
+.env
+.venv
+
+# Log files
+logs/
+
+# DBT related files
+dbt_packages/
+target/
+profiles.yml
+.user.yml
+
+# IDE settings
+.vscode/
+.idea/
+
+# Jupyter Notebook checkpoints (se estiver usando notebooks)
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+

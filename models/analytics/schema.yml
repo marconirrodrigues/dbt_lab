@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: staging               # Nome da fonte (pode ser o nome do schema ou da origem)
+    description: "Dados brutos da camada bronze."  # Descrição opcional
+    schema: staging                    # Nome do schema que contém os dados brutos
+    tables:
+      - name: trusted_spotify_tracks              # Nome da tabela na origem de dados
+        description: "Tabela com as informações das faixas de artistas e suas descrições do Spotify com harmonização"   # Descrição opcional da tabela
+        columns:
+          - name: id        # Coluna na tabela
+            description: "ID único da transação."
+          - name: name
+            description: "Nome da música"
+          - name: genre
+            description: "Genero da música"
+          - name: artists
+            description: "Nomes dos artistas e cantores"
+          - name: album
+            description: "Album da musica"
+          - name: popularity
+            description: "Nível de popularidade da música"
+
+models:
+  - name: refined_spotify_tracks                      # Nome do modelo que está sendo testado
+    description: "Transformação de dados brutos para análise."  # Descrição do modelo
+    columns:
+      - name: id                         # Nome da coluna sendo testada
+        description: "Chave primária do modelo."
+        tests:                           # Definição de testes para a coluna
+          - unique                       # Testa se os valores são únicos
+          - not_null                     # Testa se os valores não são nulos

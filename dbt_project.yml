@@ -1,0 +1,30 @@
+name: 'dbt_lab'       # Nome do projeto
+version: '1.0'               # Versão do projeto
+
+# Conexão com o perfil definido no profiles.yml
+profile: 'dbt_profile'        # Nome do perfil definido no profiles.yml
+
+# Caminhos das pastas
+model-paths: ["models"]     # Diretório onde os arquivos de modelo (SQL) estão localizados
+#test-paths: ["tests"]        # Diretório onde os arquivos de testes estão localizados
+#seed-paths: ["data"]         # Diretório para arquivos CSV (seeds)
+#macro-paths: ["macros"]      # Diretório para arquivos de macros
+#snapshot-paths: ["snapshots"] # Diretório para snapshots
+
+# Configuração de materialização padrão para os modelos
+models:
+  dbt_lab:               # Nome do projeto DBT. Todas as configurações de modelagem são aplicáveis a este projeto.
+    +schema: ''
+    # Configurações para a camada Staging
+    silver:              # Subdiretório 'staging' dentro de 'models/'
+      +materialized: 'table'   # Materialização como tabela
+      +enabled: true           # Permite habilitar modelos
+      +schema: 'staging'        # Schema (dataset) no BigQuery será 'staging'
+      +tags: ['staging']        # Tag opcional para identificação
+    
+    # Configurações para a camada Refined
+    gold:                # Subdiretório 'refined' dentro de 'models/'
+      +materialized: 'table'   # Materialização como tabela
+      +enabled: true           # Permite habilitar modelos
+      +schema: 'refined'          # Schema (dataset) no BigQuery será 'refined'
+      +tags: ['refined']          # Tag opcional para identificação
